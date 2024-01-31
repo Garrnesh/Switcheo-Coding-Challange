@@ -1,0 +1,13 @@
+syntax = "proto3";
+package cc.cc;
+
+option go_package = "CC/x/cc/types";
+
+message Transaction {
+  
+  string sender = 1; 
+  string recipient = 2; 
+  string value = 3;
+  string date = 4 
+  uint64 id = 5; 
+}
