@@ -1,0 +1,40 @@
+package types
+
+import (
+	"testing"
+
+	"CC/testutil/sample"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/stretchr/testify/require"
+)
+
+func TestMsgDeleteExchange_ValidateBasic(t *testing.T) {
+	tests := []struct {
+		name string
+		msg  MsgDeleteExchange
+		err  error
+	}{
+		{
+			name: "invalid address",
+			msg: MsgDeleteExchange{
+				Creator: "invalid_address",
+			},
+			err: sdkerrors.ErrInvalidAddress,
+		}, {
+			name: "valid address",
+			msg: MsgDeleteExchange{
+				Creator: sample.AccAddress(),
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			err := tt.msg.ValidateBasic()
+			if tt.err != nil {
+				require.ErrorIs(t, err, tt.err)
+				return
+			}
+			require.NoError(t, err)
+		})
+	}
+}

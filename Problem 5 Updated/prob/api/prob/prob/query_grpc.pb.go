@@ -19,7 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Query_Params_FullMethodName = "/prob.prob.Query/Params"
+	Query_Params_FullMethodName             = "/prob.prob.Query/Params"
+	Query_ShowExchange_FullMethodName       = "/prob.prob.Query/ShowExchange"
+	Query_ListExchange_FullMethodName       = "/prob.prob.Query/ListExchange"
+	Query_ListSenderExchange_FullMethodName = "/prob.prob.Query/ListSenderExchange"
+	Query_ListDateExchange_FullMethodName   = "/prob.prob.Query/ListDateExchange"
 )
 
 // QueryClient is the client API for Query service.
@@ -28,6 +32,14 @@ const (
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
+	// Queries a list of ShowExchange items.
+	ShowExchange(ctx context.Context, in *QueryShowExchangeRequest, opts ...grpc.CallOption) (*QueryShowExchangeResponse, error)
+	// Queries a list of ListExchange items.
+	ListExchange(ctx context.Context, in *QueryListExchangeRequest, opts ...grpc.CallOption) (*QueryListExchangeResponse, error)
+	// Queries a list of ListSenderExchange items.
+	ListSenderExchange(ctx context.Context, in *QueryListSenderExchangeRequest, opts ...grpc.CallOption) (*QueryListSenderExchangeResponse, error)
+	// Queries a list of ListDateExchange items.
+	ListDateExchange(ctx context.Context, in *QueryListDateExchangeRequest, opts ...grpc.CallOption) (*QueryListDateExchangeResponse, error)
 }
 
 type queryClient struct {
@@ -47,12 +59,56 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) ShowExchange(ctx context.Context, in *QueryShowExchangeRequest, opts ...grpc.CallOption) (*QueryShowExchangeResponse, error) {
+	out := new(QueryShowExchangeResponse)
+	err := c.cc.Invoke(ctx, Query_ShowExchange_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListExchange(ctx context.Context, in *QueryListExchangeRequest, opts ...grpc.CallOption) (*QueryListExchangeResponse, error) {
+	out := new(QueryListExchangeResponse)
+	err := c.cc.Invoke(ctx, Query_ListExchange_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListSenderExchange(ctx context.Context, in *QueryListSenderExchangeRequest, opts ...grpc.CallOption) (*QueryListSenderExchangeResponse, error) {
+	out := new(QueryListSenderExchangeResponse)
+	err := c.cc.Invoke(ctx, Query_ListSenderExchange_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ListDateExchange(ctx context.Context, in *QueryListDateExchangeRequest, opts ...grpc.CallOption) (*QueryListDateExchangeResponse, error) {
+	out := new(QueryListDateExchangeResponse)
+	err := c.cc.Invoke(ctx, Query_ListDateExchange_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 // All implementations must embed UnimplementedQueryServer
 // for forward compatibility
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
+	// Queries a list of ShowExchange items.
+	ShowExchange(context.Context, *QueryShowExchangeRequest) (*QueryShowExchangeResponse, error)
+	// Queries a list of ListExchange items.
+	ListExchange(context.Context, *QueryListExchangeRequest) (*QueryListExchangeResponse, error)
+	// Queries a list of ListSenderExchange items.
+	ListSenderExchange(context.Context, *QueryListSenderExchangeRequest) (*QueryListSenderExchangeResponse, error)
+	// Queries a list of ListDateExchange items.
+	ListDateExchange(context.Context, *QueryListDateExchangeRequest) (*QueryListDateExchangeResponse, error)
 	mustEmbedUnimplementedQueryServer()
 }
 
@@ -62,6 +118,18 @@ type UnimplementedQueryServer struct {
 
 func (UnimplementedQueryServer) Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
+}
+func (UnimplementedQueryServer) ShowExchange(context.Context, *QueryShowExchangeRequest) (*QueryShowExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowExchange not implemented")
+}
+func (UnimplementedQueryServer) ListExchange(context.Context, *QueryListExchangeRequest) (*QueryListExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExchange not implemented")
+}
+func (UnimplementedQueryServer) ListSenderExchange(context.Context, *QueryListSenderExchangeRequest) (*QueryListSenderExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSenderExchange not implemented")
+}
+func (UnimplementedQueryServer) ListDateExchange(context.Context, *QueryListDateExchangeRequest) (*QueryListDateExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDateExchange not implemented")
 }
 func (UnimplementedQueryServer) mustEmbedUnimplementedQueryServer() {}
 
@@ -94,6 +162,78 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ShowExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryShowExchangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ShowExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ShowExchange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ShowExchange(ctx, req.(*QueryShowExchangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListExchangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListExchange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListExchange(ctx, req.(*QueryListExchangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListSenderExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListSenderExchangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListSenderExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListSenderExchange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListSenderExchange(ctx, req.(*QueryListSenderExchangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ListDateExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryListDateExchangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ListDateExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Query_ListDateExchange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ListDateExchange(ctx, req.(*QueryListDateExchangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Query_ServiceDesc is the grpc.ServiceDesc for Query service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -104,6 +244,22 @@ var Query_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Params",
 			Handler:    _Query_Params_Handler,
+		},
+		{
+			MethodName: "ShowExchange",
+			Handler:    _Query_ShowExchange_Handler,
+		},
+		{
+			MethodName: "ListExchange",
+			Handler:    _Query_ListExchange_Handler,
+		},
+		{
+			MethodName: "ListSenderExchange",
+			Handler:    _Query_ListSenderExchange_Handler,
+		},
+		{
+			MethodName: "ListDateExchange",
+			Handler:    _Query_ListDateExchange_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

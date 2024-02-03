@@ -19,7 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName = "/prob.prob.Msg/UpdateParams"
+	Msg_UpdateParams_FullMethodName   = "/prob.prob.Msg/UpdateParams"
+	Msg_CreateExchange_FullMethodName = "/prob.prob.Msg/CreateExchange"
+	Msg_UpdateExchange_FullMethodName = "/prob.prob.Msg/UpdateExchange"
+	Msg_DeleteExchange_FullMethodName = "/prob.prob.Msg/DeleteExchange"
 )
 
 // MsgClient is the client API for Msg service.
@@ -29,6 +32,9 @@ type MsgClient interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
+	CreateExchange(ctx context.Context, in *MsgCreateExchange, opts ...grpc.CallOption) (*MsgCreateExchangeResponse, error)
+	UpdateExchange(ctx context.Context, in *MsgUpdateExchange, opts ...grpc.CallOption) (*MsgUpdateExchangeResponse, error)
+	DeleteExchange(ctx context.Context, in *MsgDeleteExchange, opts ...grpc.CallOption) (*MsgDeleteExchangeResponse, error)
 }
 
 type msgClient struct {
@@ -48,6 +54,33 @@ func (c *msgClient) UpdateParams(ctx context.Context, in *MsgUpdateParams, opts 
 	return out, nil
 }
 
+func (c *msgClient) CreateExchange(ctx context.Context, in *MsgCreateExchange, opts ...grpc.CallOption) (*MsgCreateExchangeResponse, error) {
+	out := new(MsgCreateExchangeResponse)
+	err := c.cc.Invoke(ctx, Msg_CreateExchange_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdateExchange(ctx context.Context, in *MsgUpdateExchange, opts ...grpc.CallOption) (*MsgUpdateExchangeResponse, error) {
+	out := new(MsgUpdateExchangeResponse)
+	err := c.cc.Invoke(ctx, Msg_UpdateExchange_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DeleteExchange(ctx context.Context, in *MsgDeleteExchange, opts ...grpc.CallOption) (*MsgDeleteExchangeResponse, error) {
+	out := new(MsgDeleteExchangeResponse)
+	err := c.cc.Invoke(ctx, Msg_DeleteExchange_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -55,6 +88,9 @@ type MsgServer interface {
 	// UpdateParams defines a (governance) operation for updating the module
 	// parameters. The authority defaults to the x/gov module account.
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
+	CreateExchange(context.Context, *MsgCreateExchange) (*MsgCreateExchangeResponse, error)
+	UpdateExchange(context.Context, *MsgUpdateExchange) (*MsgUpdateExchangeResponse, error)
+	DeleteExchange(context.Context, *MsgDeleteExchange) (*MsgDeleteExchangeResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -64,6 +100,15 @@ type UnimplementedMsgServer struct {
 
 func (UnimplementedMsgServer) UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateParams not implemented")
+}
+func (UnimplementedMsgServer) CreateExchange(context.Context, *MsgCreateExchange) (*MsgCreateExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateExchange not implemented")
+}
+func (UnimplementedMsgServer) UpdateExchange(context.Context, *MsgUpdateExchange) (*MsgUpdateExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateExchange not implemented")
+}
+func (UnimplementedMsgServer) DeleteExchange(context.Context, *MsgDeleteExchange) (*MsgDeleteExchangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteExchange not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -96,6 +141,60 @@ func _Msg_UpdateParams_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CreateExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateExchange)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CreateExchange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateExchange(ctx, req.(*MsgCreateExchange))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdateExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateExchange)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_UpdateExchange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateExchange(ctx, req.(*MsgUpdateExchange))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DeleteExchange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteExchange)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteExchange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_DeleteExchange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteExchange(ctx, req.(*MsgDeleteExchange))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -106,6 +205,18 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateParams",
 			Handler:    _Msg_UpdateParams_Handler,
+		},
+		{
+			MethodName: "CreateExchange",
+			Handler:    _Msg_CreateExchange_Handler,
+		},
+		{
+			MethodName: "UpdateExchange",
+			Handler:    _Msg_UpdateExchange_Handler,
+		},
+		{
+			MethodName: "DeleteExchange",
+			Handler:    _Msg_DeleteExchange_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
