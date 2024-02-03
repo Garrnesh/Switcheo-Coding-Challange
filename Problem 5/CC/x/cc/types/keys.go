@@ -11,6 +11,14 @@ const (
 	MemStoreKey = "mem_cc"
 )
 
+const (
+	ExchangeKey = "Exchange/value/"
+)
+
+const (
+	ExchangeCountKey = "Exchange/count/"
+)
+
 var (
 	ParamsKey = []byte("p_cc")
 )
