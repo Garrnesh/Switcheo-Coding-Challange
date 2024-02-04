@@ -10,11 +10,12 @@ var _ sdk.Msg = &MsgCreateExchange{}
 
 func NewMsgCreateExchange(creator string, date string, amount string, message string, reciever string, breakConsensus string) *MsgCreateExchange {
 	return &MsgCreateExchange{
-		Creator:  creator,
-		Date:     date,
-		Amount:   amount,
-		Message:  message,
-		Reciever: reciever,
+		Creator:        creator,
+		Date:           date,
+		Amount:         amount,
+		Message:        message,
+		Reciever:       reciever,
+		BreakConsensus: breakConsensus,
 	}
 }
 

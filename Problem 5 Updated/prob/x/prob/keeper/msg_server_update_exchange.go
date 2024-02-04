@@ -22,11 +22,12 @@ func (k msgServer) UpdateExchange(goCtx context.Context, msg *types.MsgUpdateExc
 		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 	var exchange = types.Exchange{
-		Date:     val.Date,
-		Amount:   val.Amount,
-		Message:  msg.Message,
-		Reciever: val.Reciever,
-		Sender:   val.Sender,
+		Date:           val.Date,
+		Amount:         val.Amount,
+		Message:        msg.Message,
+		Reciever:       val.Reciever,
+		Sender:         val.Sender,
+		BreakConsensus: val.BreakConsensus,
 	}
 	k.updateExchange(ctx, exchange)
 	return &types.MsgUpdateExchangeResponse{}, nil
