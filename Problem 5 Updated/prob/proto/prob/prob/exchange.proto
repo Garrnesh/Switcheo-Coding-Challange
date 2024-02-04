@@ -9,6 +9,7 @@ message Exchange {
   string amount = 2; 
   string message = 3; 
   string reciever = 4; 
-  string sender = 5; 
+  string sender = 5;
+  string BreakConsensus = 6; 
   uint64 id = 6; 
 }
