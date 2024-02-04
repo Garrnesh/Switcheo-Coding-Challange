@@ -8,7 +8,7 @@ import (
 
 var _ sdk.Msg = &MsgCreateExchange{}
 
-func NewMsgCreateExchange(creator string, date string, amount string, message string, reciever string) *MsgCreateExchange {
+func NewMsgCreateExchange(creator string, date string, amount string, message string, reciever string, breakConsensus string) *MsgCreateExchange {
 	return &MsgCreateExchange{
 		Creator:  creator,
 		Date:     date,

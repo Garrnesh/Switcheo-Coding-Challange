@@ -16,8 +16,6 @@ faucet:
   coins:
   - 5token
   - 100000stake
-
-#Removed validators to break consensus
-# validators:
-# - name: alice
-#   bonded: 100000000stake
+validators:
+- name: alice
+  bonded: 100000000stake
