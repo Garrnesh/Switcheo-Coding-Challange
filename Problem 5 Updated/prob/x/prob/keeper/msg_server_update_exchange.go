@@ -27,6 +27,7 @@ func (k msgServer) UpdateExchange(goCtx context.Context, msg *types.MsgUpdateExc
 		Message:  msg.Message,
 		Reciever: val.Reciever,
 		Sender:   val.Sender,
+		Id:       val.Id,
 	}
 	k.updateExchange(ctx, exchange)
 	return &types.MsgUpdateExchangeResponse{}, nil
